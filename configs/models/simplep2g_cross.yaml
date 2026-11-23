@@ -1,0 +1,40 @@
+num_workers: 0
+per_gpu_batch_size: 1
+num_genes: 200
+image_encoder: virchow2
+cond_size: 2560
+num_aug_ratio: 2
+model: simplep2g_cross
+decoder_depth: 12
+hidden_size: 384
+num_heads: 6
+loss_name: gaussian_nll
+max_grad_norm: 1.0
+warmup_steps: 1000
+dropout: 0.05
+num_cond_tokens: 4
+neighbor_cond_size: 2560
+num_neighbor_tokens: 24
+global_cond_size: 2560
+cosine_decay: true
+min_lr_ratio: 0.1
+ema_decay: 0.999
+optimizer:
+  name: adamw
+  lr: 5.0e-05
+  weight_decay: 0.05
+  betas:
+  - 0.9
+  - 0.999
+max_spots: 256
+filter_bad_spots: true
+training:
+  enable_tf32: true
+chunks_per_slide: 8
+sample_augmented_targets: true
+context_embedding_source: target_encoder
+neighbor_position_mode: relative
+use_target_context: true
+use_neighbor_context: true
+use_slide_context: false
+protocol_file: configs/protocols/benchmark.yaml

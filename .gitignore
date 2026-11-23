@@ -1,0 +1,50 @@
+# Python environments, build products and local tools
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.vscode/
+
+# Local credentials
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# Downloaded data, weights and experiment outputs
+/hest1k_datasets/
+/checkpoints/
+/results/
+/logs/
+/artifacts/
+wandb/
+*.log
+*.pt
+*.pth
+*.safetensors
+*.bin
+
+# Research workspaces and the separately checked-out project page
+/ablation/
+/internal/
+/.release-check/
+/tests/
+/paper/
+/project_page/
+/docs/rebuttal/
+
+# Submission copies, local release notes and workspace metadata
+/34_SimpleP2G_Importance_of_Ima.pdf
+/shiyishi.*
+/HEST_v1_2_1.csv
+/.github/prompt.md
+/.github/workflows/pages.yml
+/docs/assets/architecture.png
+/skills-lock.json
+/.agents/
+/.tmux*

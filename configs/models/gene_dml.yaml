@@ -1,0 +1,44 @@
+protocol_file: configs/protocols/benchmark.yaml
+model: gene_dml_cross
+batch_size: 256
+optimizer:
+  name: adam
+  lr: 0.0001
+  weight_decay: 0.0
+  betas:
+  - 0.9
+  - 0.999
+scheduler:
+  name: step
+  step_size: 20
+  gamma: 0.95
+encoder:
+  name: virchow2
+  image_dim: 1280
+  target_tokens: 261
+  neighbor_grid:
+  - 5
+  - 5
+  global_context: complete_same_slide
+model_config:
+  image_dim: 1280
+  gene_dim: 200
+  projection_dim: 512
+  neighbor_depth: 4
+  neighbor_heads: 4
+  neighbor_mlp_ratio: 4
+  neighbor_dropout: 0.3
+  global_depth: 5
+  global_heads: 8
+  global_mlp_ratio: 4
+  global_dropout: 0.3
+  temperature: 0.07
+  lambda_cld: 1.0
+  cld_temperature: 0.1
+  n_clusters: 18
+  max_grid_cells: 262144
+checkpoint_global_cohorts:
+- ccrcc
+upstream:
+  repository: https://github.com/YXSong000/Gene-DML
+  commit: 385790a4f4f3fc041e1cef3eed53e23c0bb4e543

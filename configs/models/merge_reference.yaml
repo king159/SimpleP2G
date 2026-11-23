@@ -1,0 +1,25 @@
+num_workers: 0
+per_gpu_batch_size: 1
+num_genes: 200
+image_encoder: merge_resnet18
+cond_size: 256
+model: merge
+gat_num_heads: 8
+drop_edge: 0.2
+n_neighbors: 8
+n_spatial_clusters: 5
+n_feature_clusters: 5
+max_grad_norm: 1.0
+warmup_steps: 50
+cosine_decay: true
+min_lr_ratio: 0.1
+optimizer:
+  name: adamw
+  lr: 0.001
+  weight_decay: 0.0
+  betas:
+  - 0.9
+  - 0.999
+pair_role: released_encoder
+encoder_label: MERGE-TCGA-ResNet18
+protocol_file: configs/protocols/benchmark.yaml

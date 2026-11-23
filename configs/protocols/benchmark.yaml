@@ -1,0 +1,51 @@
+name: benchmark
+datasets: [brain, prad, her2st, lung, ccrcc]
+panels: [hmhvg, hvg]
+seed: 42
+total_epochs: 100
+epoch_overrides:
+  stem: 200
+# One-based first epoch at the new precision, matching the published runs.
+precision_transitions:
+  ccrcc_fold1_hmhvg_stem_seed42: {bf16_from_epoch: 192}
+  prad_fold1_hmhvg_stem_seed42: {bf16_from_epoch: 130}
+  brain_fold2_hmhvg_stem_seed42: {bf16_from_epoch: 158}
+  prad_fold0_hvg_bleep_reference_seed42: {validation_fp32_from_epoch: 99}
+  ccrcc_fold2_hvg_bleep_reference_seed42: {validation_fp32_from_epoch: 87}
+early_stopping: false
+checkpoint_selection: best_validation_pcc200
+validation_every_epochs: 1
+validation_metric: PCC200
+validation_mode: max
+checkpoint_tie_break: earliest_epoch
+split_manifest: configs/splits/heldout.json
+test_holdouts_per_dataset: 3
+validation_slides_per_split: 1
+gene_selection_scope: training_slides_excluding_validation_and_test
+refit_with_validation: false
+batch_size:
+  target_spots: 256
+  slide_items: 1
+  note: These are different sampling units, not equal optimizer-update budgets.
+learning_rates:
+  bleep: 0.001
+  stem: 0.0001
+  strank: 0.00005
+  histogene: 0.00001
+  stflow: 0.0005
+  merge: 0.001
+  m2tglgo: 0.0001
+  gene_dml: 0.0001
+  simplep2g: preserve_dataset_configuration
+  simplep2g_cross: 0.00005
+stem_evaluation:
+  validation_samples_per_spot: 1
+  final_test_samples_per_spot: 20
+  diffusion_steps_per_sample: 1000
+  fixed_validation_rng_isolated_from_training: true
+notes:
+  - Stem uses 200 epochs; other methods use 100. Each method uses the same budget for both gene panels and all datasets.
+  - Reuse immutable image features; regenerate gene panels without validation or test labels.
+  - Test expression is accessed only after validation checkpoint selection.
+  - Keep each model's existing context sampling; M2TGLGO uses one slide item with a 1024-spot training cap, explicitly distinct from pooled spot batch 256.
+  - Shared gene identifiers are checked against validation/test measurement schemas; expression statistics use training slides only.

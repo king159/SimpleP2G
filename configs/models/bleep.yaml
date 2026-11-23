@@ -1,0 +1,24 @@
+num_workers: 0
+per_gpu_batch_size: 256
+num_genes: 200
+image_encoder: virchow2
+cond_size: 2560
+num_aug_ratio: 2
+model: bleep_enhanced
+warmup_steps: 0
+bleep:
+  proj_dim: 256
+  hidden_dim: 512
+  dropout: 0.1
+  temperature: 1.0
+  topk: 64
+  bank_subsample: -1
+  bank_batch_size: 4096
+optimizer:
+  name: adamw
+  lr: 0.001
+  weight_decay: 0.001
+  betas:
+  - 0.9
+  - 0.999
+protocol_file: configs/protocols/benchmark.yaml
