@@ -1,0 +1,9 @@
+# Local manuscript previews and figure-generation workspace
+/scripts/
+/img/spatial_combined.png
+/img/architecture.png
+__pycache__/
+
+# Local paper proofs and static builds
+/*.pdf
+/site/

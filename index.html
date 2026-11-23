@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SimpleP2G studies the importance of image encoders for gene expression prediction from pathology images, with controlled comparisons on five HEST-1K datasets.">
+  <meta name="theme-color" content="#f7f2e9">
+  <meta property="og:title" content="SimpleP2G · The representation matters.">
+  <meta property="og:description" content="Image representations drive pathology-to-gene prediction. SimpleP2G makes this observation concrete with a direct gene-query decoder.">
+  <meta property="og:type" content="website">
+  <title>SimpleP2G · Gene Expression Prediction from Pathology Images</title>
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/task.css">
+  <script src="js/results-data.js" defer></script>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#top" aria-label="SimpleP2G home"><img src="img/favicon.svg" width="34" height="34" alt=""><span>SimpleP2G</span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="site-nav" aria-expanded="false" hidden><span></span><span></span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#task">Task</a><a href="#overview">Encoder</a><a href="#model">SimpleP2G</a><a href="#results">Results</a>
+        <a class="nav-code" href="https://github.com/king159/SimpleP2G" target="_blank" rel="noreferrer">Code <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="hero" id="top">
+      <div class="page-shell hero-grid">
+        <div class="hero-copy">
+          <h1>SimpleP2G<span>Importance of Image Encoders for Gene Expression Prediction from Pathology Images</span></h1>
+          <span class="mono-label">Authors &amp; affiliations</span>
+          <p class="paper-authors">
+            <a href="https://personal-page.wjh.app/">Jinghao Wang<sup>1</sup></a>
+            <a href="https://zhangjj26.github.io/">Jingjie Zhang<sup>1</sup></a>
+            <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ">Chang-Yu Hsieh<sup>2</sup></a>
+            <a href="https://scholar.google.com/citations?user=BlSFT8UAAAAJ"> <span class="corresponding-author">Chunbin Gu<sup>1,*</sup></span> </a>
+            <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php">Pheng Ann Heng<sup>1</sup></a>
+          </p>
+          <p class="paper-affiliations"><span><sup>1</sup> The Chinese University of Hong Kong</span><span><sup>2</sup> Zhejiang University</span></p>
+          <p class="paper-contact"><a href="mailto:jinghao.w@link.cuhk.edu.hk">jinghao.w@link.cuhk.edu.hk</a></p>
+          <p class="hero-deck">Before adding a more complex prediction head, <strong>start with a better image representation.</strong> A direct decoder over frozen pathology embeddings is already a strong baseline.</p>
+          <div class="hero-actions">
+            <span class="button button-dark" aria-disabled="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 2h7l4 4v12H5zM12 2v5h4M8 10h5M8 13h5"/></svg>Paper <small>Coming soon</small></span>
+            <a class="button" href="https://github.com/king159/SimpleP2G" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-3c4 0 6-2 6-5a4 4 0 0 0-1-3 4 4 0 0 0 0-4s-2 0-4 2a14 14 0 0 0-6 0C7 3 5 3 5 3a4 4 0 0 0 0 4 4 4 0 0 0-1 3c0 3 2 5 6 5a3.5 3.5 0 0 0-1 3v4"/></svg>Code <small>GitHub</small></a>
+            <a class="button" href="#results">Full results <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <figure class="hero-art">
+          <a class="figure-link" href="img/munch-the-scream.jpg" data-figure data-caption="The Scream, 1893 · Edvard Munch." aria-label="Enlarge The Scream by Edvard Munch"><img src="img/munch-the-scream.jpg" width="1024" height="1271" fetchpriority="high" alt="Edvard Munch’s The Scream: a figure holds its face on a bridge beneath a swirling red-orange sky."></a>
+          <figcaption>The Scream, 1893 · Edvard Munch</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-white task-block" id="task">
+      <div class="page-shell">
+        <div class="split-heading">
+          <div><div class="eyebrow">01 / The task</div><h2>From tissue images<br>to gene expression.</h2></div>
+          <p class="section-intro">Predict the expression of 200 genes at a tissue spot from its histology image. The single-patch setting uses the target patch alone; the cross-patch setting also uses nearby images. Both predict the same target, without neighboring expression as input.</p>
+        </div>
+        <figure class="task-comparison" id="single-vs-cross">
+          <div class="task-settings">
+            <article class="task-setting">
+              <span class="setting-kind">Single-patch setting</span>
+              <div class="setting-body">
+                <img src="img/task-single.svg" width="208" height="208" alt="Only the central target patch is highlighted; surrounding patches are faded out.">
+                <div><h3>The target patch alone.</h3><p>Predict expression from the image centered on the target spot.</p><span class="setting-model">SimpleP2G</span></div>
+              </div>
+            </article>
+            <article class="task-setting task-setting-cross">
+              <span class="setting-kind">Cross-patch setting</span>
+              <div class="setting-body">
+                <img src="img/task-cross.svg" width="208" height="208" alt="The same central target patch and its 24 neighboring patches are highlighted.">
+                <div><h3>The target and its neighbors.</h3><p>Add 24 nearby image patches and their relative positions.</p><span class="setting-model">SimpleP2G-cross</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="task-pipeline" aria-label="Shared prediction pipeline">
+            <div><span class="pipeline-label">Image representation</span><strong>Frozen Virchow2</strong></div>
+            <span class="pipeline-arrow" aria-hidden="true">→</span>
+            <div><span class="pipeline-label">Prediction head</span><strong>Gene-query decoder</strong></div>
+            <span class="pipeline-arrow" aria-hidden="true">→</span>
+            <div><span class="pipeline-label">At the target spot</span><strong>200-gene expression</strong></div>
+          </div>
+          <figcaption>Both settings predict expression at the same target spot. Neighboring expression is never an input. Tissue grids are schematic.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-paper" id="overview">
+      <div class="page-shell">
+        <div class="split-heading">
+          <div><div class="eyebrow">02 / The encoder</div><h2>How much progress<br>comes from the encoder?</h2></div>
+          <div class="section-intro"><p>Prediction heads, image encoders, and spatial context often change together. That makes it difficult to tell which component explains a reported gain.</p><p>We separate these factors: upgrade an existing method’s image input, compare heads with a shared encoder, and vary context within one decoder.</p></div>
+        </div>
+        <div class="encoder-toolbar">
+          <p class="encoder-summary">Same head. Different representation.<br><span id="encoder-summary">Explore the paired encoder comparisons.</span></p>
+        </div>
+        <div class="dataset-picker" role="group" aria-label="Encoder comparison dataset">
+          <button type="button" data-encoder-dataset="Brain" aria-pressed="true">Brain</button>
+          <button type="button" data-encoder-dataset="PRAD" aria-pressed="false">PRAD</button>
+          <button type="button" data-encoder-dataset="HER2ST" aria-pressed="false">HER2ST</button>
+          <button type="button" data-encoder-dataset="Lung" aria-pressed="false">Lung</button>
+          <button type="button" data-encoder-dataset="ccRCC" aria-pressed="false">ccRCC</button>
+        </div>
+        <div class="encoder-board">
+          <div class="encoder-board-heading"><div><h3 id="encoder-title">Brain</h3><p>HMHVG-200 + HVG-200 · both prediction settings</p></div><div class="legend"><span><i class="reference-dot"></i>Reference input</span><span><i class="virchow-dot"></i>Virchow2</span></div></div>
+          <div class="encoder-axis" aria-hidden="true"><span>Gene panel</span><div id="encoder-axis-ticks"></div><span>PCC-200 ↑ / change</span></div>
+          <div id="encoder-chart" class="encoder-chart" aria-live="polite"></div>
+        </div>
+        <p class="chart-footnote">Arrows connect mean PCC scores on a shared scale for each dataset. Values beside the chart show mean ± sample SD across three matched folds, including the paired PCC changes. <sup>†</sup> Our adaptation. <a class="text-link" href="data/encoder-upgrades.csv" download>Download 120 fold pairs ↓</a></p>
+        <noscript><p class="fallback">The interactive charts need JavaScript. <a href="data/encoder-upgrades.csv">Download all encoder comparisons</a>.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section section-white model-section" id="model">
+      <div class="page-shell">
+        <div class="split-heading">
+          <div><div class="eyebrow">03 / The model</div><h2>SimpleP2G</h2></div>
+          <p class="section-intro">A direct gene-query decoder turns frozen pathology embeddings into gene expression predictions. Spatial context enters through additional image tokens.</p>
+        </div>
+        <div class="model-layout">
+          <figure class="architecture-figure">
+            <a class="figure-link" href="img/architecture.svg" data-figure data-caption="SimpleP2G in the single-patch setting. SimpleP2G-cross adds neighboring image tokens while retaining the same decoder architecture." aria-label="Enlarge the SimpleP2G architecture diagram"><img src="img/architecture.svg" width="441" height="454" loading="lazy" alt="SimpleP2G architecture: a frozen Virchow2 encoder and a two-layer MLP produce four image tokens. Gene queries pass through self-attention, cross-attention to the image tokens, and a gated feed-forward network to predict gene expression."></a>
+            <figcaption>Single-patch architecture <span>Click to enlarge ↗</span></figcaption>
+          </figure>
+          <div class="model-description">
+            <div><span class="mono-label">01 / Image representation</span><h3>Start with a frozen encoder.</h3><p>Virchow2 represents the target patch. A two-layer MLP maps its embedding to four conditioning tokens.</p></div>
+            <div><span class="mono-label">02 / Gene prediction</span><h3>One query for each gene.</h3><p>Learnable gene queries attend to the image tokens through a shared decoder, producing an expression prediction for each gene.</p></div>
+            <div><span class="mono-label">03 / Spatial context</span><h3>Add context to the same decoder.</h3><p>SimpleP2G-cross adds 24 neighboring image tokens with relative positions. The decoder architecture and prediction target stay the same.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-white" id="results">
+      <div class="page-shell">
+        <div class="split-heading"><div><div class="eyebrow">04 / Full results</div><h2>Unified Encoder.</h2></div><p class="section-intro">Compare all prediction heads with shared Virchow2 features across five HEST-1K datasets. All 300 fits are complete. Each dataset reports the mean and sample SD over three held-out slides, using seed 42 and validation-selected checkpoints. SimpleP2G leads all ten single-patch dataset–panel comparisons; SimpleP2G-cross leads eight of ten cross-patch comparisons. Switch the panel or metric to explore the exceptions.</p></div>
+        <div class="results-toolbar">
+          <div class="panel-picker" role="group" aria-label="Results gene panel"><button type="button" data-results-panel="HMHVG" aria-pressed="true">HMHVG-200</button><button type="button" data-results-panel="HVG" aria-pressed="false">HVG-200</button></div>
+          <div class="compact-controls"><label>Metric<select id="results-metric"><option value="pcc200">PCC-200 ↑</option><option value="pcc50">PCC-50 ↑</option><option value="mse">MSE ↓</option><option value="mae">MAE ↓</option></select></label></div>
+        </div>
+        <div class="results-tables">
+          <article class="results-setting">
+            <div class="results-setting-heading"><div><span class="mono-label">01 / Target image</span><h3 id="single-results-heading">Single-patch setting</h3></div><p>Predict from the target patch alone.</p></div>
+            <div class="table-scroll" tabindex="0" role="region" aria-labelledby="single-results-heading" aria-describedby="results-caption"><table id="results-single" class="results-table"></table></div>
+          </article>
+          <article class="results-setting">
+            <div class="results-setting-heading"><div><span class="mono-label">02 / Target + context</span><h3 id="cross-results-heading">Cross-patch setting</h3></div><p>Predict with additional image context.</p></div>
+            <div class="table-scroll" tabindex="0" role="region" aria-labelledby="cross-results-heading" aria-describedby="results-caption"><table id="results-cross" class="results-table"></table></div>
+          </article>
+        </div>
+        <div class="results-caption" id="results-caption">
+          <div><p><strong>Bold</strong> marks the best mean in each dataset within the same setting, including ties. SD appears in smaller type.</p></div>
+          <div class="results-download"><a class="button" href="data/main-results.csv" download>Download full results <span aria-hidden="true">↓</span></a><span>300 runs · both panels · four metrics · CSV</span></div>
+          </div>
+        <noscript><p class="fallback">Enable JavaScript to explore the tables, or <a href="data/main-results.csv">download the full results as CSV</a>.</p></noscript>
+      </div>
+    </section>
+
+  </main>
+  <footer class="site-footer">
+    <div class="page-shell footer-grid">
+      <div class="footer-project">
+        <a class="brand brand-footer" href="#top"><img src="img/favicon.svg" width="34" height="34" alt=""><span>SimpleP2G</span></a>
+        <p>Importance of Image Encoders for Gene Expression Prediction from Pathology Images</p>
+      </div>
+      <div class="footer-authors">
+        <span class="footer-label">Authors</span>
+        <p><a href="https://personal-page.wjh.app/">Jinghao Wang</a>,
+          <a href="https://zhangjj26.github.io/">Jingjie Zhang</a>,
+          <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ">Chang-Yu Hsieh</a>,
+          <a href="https://scholar.google.com/citations?user=BlSFT8UAAAAJ" target="_blank" rel="noreferrer">Chunbin Gu</a>,
+          <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php">Pheng Ann Heng</a></p>
+        <small>The Chinese University of Hong Kong · Zhejiang University</small>
+      </div>
+      <nav class="footer-links" aria-label="Project links">
+        <span class="footer-label">Project</span>
+        <a href="#task">Task</a>
+        <a href="#overview">Encoder comparisons</a>
+        <a href="#model">SimpleP2G</a>
+        <a href="#results">Full results</a>
+        <a href="https://github.com/king159/SimpleP2G" target="_blank" rel="noreferrer">Code</a>
+      </nav>
+    </div>
+    <div class="page-shell footer-bottom"><span>© 2026 SimpleP2G authors</span></div>
+  </footer>
+  <dialog class="figure-dialog" id="figure-dialog" aria-labelledby="figure-caption"><button type="button" class="dialog-close" aria-label="Close enlarged figure">Close ×</button><img id="figure-image" alt=""><p id="figure-caption"></p></dialog>
+</body>
+</html>

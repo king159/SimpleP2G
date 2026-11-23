@@ -1,0 +1,51 @@
+name: Build and deploy SimpleP2G project page
+
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      pages: read
+    if: github.ref == 'refs/heads/gh-pages'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Build and check static site
+        run: |
+          python3 build_site.py site
+          node --check site/js/site.js
+          node --check site/js/results-data.js
+      - uses: actions/configure-pages@v5
+        if: ${{ !github.event.repository.private }}
+      - uses: actions/upload-pages-artifact@v4
+        if: ${{ !github.event.repository.private }}
+        with:
+          path: site
+
+  deploy:
+    if: github.ref == 'refs/heads/gh-pages' && !github.event.repository.private
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
