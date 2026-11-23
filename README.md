@@ -19,6 +19,8 @@
   <a href="https://personal-page.wjh.app/SimpleP2G/">Project Page</a>
 </div>
 
+<p align="center"><em>KDD 2027 · AI for Sciences Track</em></p>
+
 > **TL;DR** Start with a better image representation. A direct decoder on frozen pathology embeddings is already a strong baseline for spatial gene expression prediction.
 
 <p align="center">
