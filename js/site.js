@@ -1,10 +1,6 @@
 (() => {
   'use strict';
   document.body.classList.add('js-ready');
-  const header = document.querySelector('.site-header');
-  const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 12);
-  window.addEventListener('scroll', updateHeader, { passive: true });
-  updateHeader();
   const menu = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.site-nav');
   menu.hidden = false;
@@ -243,6 +239,7 @@
         });
       }
     }, { rootMargin: '-15% 0px -65% 0px' });
+    observer.observe(document.querySelector('#top'));
     links.forEach(link => observer.observe(document.querySelector(link.hash)));
   }
 })();
