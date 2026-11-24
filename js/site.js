@@ -6,13 +6,11 @@
   menu.hidden = false;
   const closeMenu = () => {
     menu.setAttribute('aria-expanded', 'false');
-    menu.setAttribute('aria-label', 'Open navigation');
     nav.classList.remove('is-open');
   };
   menu.addEventListener('click', () => {
     const open = menu.getAttribute('aria-expanded') !== 'true';
     menu.setAttribute('aria-expanded', String(open));
-    menu.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     nav.classList.toggle('is-open', open);
   });
   nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
@@ -25,7 +23,7 @@
   document.addEventListener('click', event => {
     if (!event.target.closest('.site-header')) closeMenu();
   });
-  matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
+  matchMedia('(max-width: 760px)').addEventListener('change', closeMenu);
 
   const dialog = document.querySelector('#figure-dialog');
   document.querySelectorAll('[data-figure]').forEach(link => {

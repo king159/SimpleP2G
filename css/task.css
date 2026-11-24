@@ -2,7 +2,7 @@
   margin-top: clamp(26px, 3.5vw, 46px);
   padding: 24px clamp(18px, 2.6vw, 38px) 18px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  background: var(--surface);
 }
 .task-settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .task-setting:first-child { padding-inline-end: 28px; }
@@ -19,7 +19,7 @@
   gap: 18px;
   padding: 20px;
   margin-top: 24px;
-  border-radius: 4px;
+  border-block: 1px solid var(--line);
   background: var(--paper);
   text-align: center;
 }
