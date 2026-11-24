@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="SimpleP2G studies the importance of image encoders for gene expression prediction from pathology images, with controlled comparisons on five HEST-1K datasets.">
-  <meta name="theme-color" content="#292634">
+  <meta name="theme-color" content="#edbd96">
   <meta property="og:title" content="SimpleP2G · The representation matters.">
   <meta property="og:description" content="Image representations drive pathology-to-gene prediction. SimpleP2G makes this observation concrete with a direct gene-query decoder.">
   <meta property="og:type" content="website">
   <title>SimpleP2G · Gene Expression Prediction from Pathology Images</title>
-  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg?v=206116f0c630">
   <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/site.css?v=e2600dccd391">
+  <link rel="stylesheet" href="css/site.css?v=cee88ed1b34c">
   <link rel="stylesheet" href="css/task.css?v=262093d9121d">
-  <link rel="stylesheet" href="css/project-series.css?v=00d743e1b9e1">
+  <link rel="stylesheet" href="css/project-series.css?v=fd521ba72f93">
   <script src="js/results-data.js" defer></script>
   <script src="js/site.js?v=d09866972822" defer></script>
 </head>
@@ -21,7 +21,7 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="nav-shell">
-      <a class="brand" href="#top" aria-label="SimpleP2G home"><img src="img/favicon.svg" width="34" height="34" alt=""><span>SimpleP2G</span></a>
+      <a class="brand" href="#top" aria-label="SimpleP2G home"><img src="img/favicon.svg?v=206116f0c630" width="34" height="34" alt=""><span>SimpleP2G</span></a>
       <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu <span aria-hidden="true">+</span></button>
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#task">Task</a><a href="#overview">Encoder</a><a href="#model">Model</a><a href="#results">Results</a>
@@ -45,7 +45,6 @@
         <figure class="hero-art">
           <a class="figure-link art-link" href="img/munch-the-scream.jpg" data-figure data-caption="The Scream, 1893 · Edvard Munch." aria-label="Enlarge The Scream by Edvard Munch">
             <img src="img/munch-the-scream-preview.webp" width="730" height="906" fetchpriority="high" alt="Edvard Munch’s The Scream. A figure holds its face on a bridge beneath a swirling red-orange sky.">
-            <span class="art-expand" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4h5v5M20 4l-6 6M9 20H4v-5m0 5 6-6"/></svg></span>
           </a>
           <figcaption><span><cite>The Scream</cite>, 1893</span><span>Edvard Munch</span></figcaption>
         </figure>
@@ -73,13 +72,13 @@
           <div class="task-settings">
             <article class="task-setting">
               <div class="setting-body">
-                <img src="img/task-single.svg" width="208" height="208" loading="lazy" alt="Only the central target patch is highlighted; surrounding patches are faded out.">
+                <img src="img/task-single.svg?v=d0640085a036" width="208" height="208" loading="lazy" alt="Only the central target patch is highlighted; surrounding patches are faded out.">
                 <div><h3>Single-patch setting</h3><p>Predict expression from the image centered on the target spot.</p><span class="setting-model">SimpleP2G</span></div>
               </div>
             </article>
             <article class="task-setting task-setting-cross">
               <div class="setting-body">
-                <img src="img/task-cross.svg" width="208" height="208" loading="lazy" alt="The same central target patch and its 24 neighboring patches are highlighted.">
+                <img src="img/task-cross.svg?v=7781af6d5d3d" width="208" height="208" loading="lazy" alt="The same central target patch and its 24 neighboring patches are highlighted.">
                 <div><h3>Cross-patch setting</h3><p>Add 24 nearby image patches and their relative positions.</p><span class="setting-model">SimpleP2G-cross</span></div>
               </div>
             </article>
@@ -130,8 +129,8 @@
         </div>
         <div class="model-layout">
           <figure class="architecture-figure">
-            <a class="figure-link" href="img/architecture.svg" data-figure data-caption="SimpleP2G in the single-patch setting. SimpleP2G-cross adds neighboring image tokens while retaining the same decoder architecture." aria-label="Enlarge the SimpleP2G architecture diagram"><img src="img/architecture.svg" width="441" height="454" loading="lazy" alt="SimpleP2G architecture: a frozen Virchow2 encoder and a two-layer MLP produce four image tokens. Gene queries pass through self-attention, cross-attention to the image tokens, and a gated feed-forward network to predict gene expression."></a>
-            <figcaption>Single-patch architecture <span>Enlarge figure ↗</span></figcaption>
+            <a class="figure-link" href="img/architecture.svg?v=eadb23d25a4f" data-figure data-caption="SimpleP2G in the single-patch setting. SimpleP2G-cross adds neighboring image tokens while retaining the same decoder architecture." aria-label="Enlarge the SimpleP2G architecture diagram"><img src="img/architecture.svg?v=eadb23d25a4f" width="441" height="454" loading="lazy" alt="SimpleP2G architecture: a frozen Virchow2 encoder and a two-layer MLP produce four image tokens. Gene queries pass through self-attention, cross-attention to the image tokens, and a gated feed-forward network to predict gene expression."></a>
+            <figcaption>Single-patch architecture</figcaption>
           </figure>
           <div class="model-description">
             <div><h3>Frozen image representation</h3><p>Virchow2 represents the target patch. A two-layer MLP maps its embedding to four conditioning tokens.</p></div>
@@ -172,7 +171,7 @@
   <footer class="site-footer">
     <div class="page-shell footer-grid">
       <div class="footer-project">
-        <a class="brand brand-footer" href="#top"><img src="img/favicon.svg" width="34" height="34" alt=""><span>SimpleP2G</span></a>
+        <a class="brand brand-footer" href="#top"><img src="img/favicon.svg?v=206116f0c630" width="34" height="34" alt=""><span>SimpleP2G</span></a>
         <p>Importance of Image Encoders for Gene Expression Prediction from Pathology Images</p>
       </div>
       <div class="footer-authors">

@@ -2,27 +2,32 @@
 @font-face { font-family: "JetBrains Mono"; src: url("../fonts/jetbrains-mono.woff2") format("woff2"); font-style: normal; font-weight: 100 800; font-display: swap; }
 @font-face { font-family: "Playfair Display"; src: url("../fonts/playfair-display-italic.woff2") format("woff2"); font-style: italic; font-weight: 400 900; font-display: swap; }
 :root {
-  --series-night: #292634;
-  --series-ink: #2d2939;
-  --series-muted: #555a6b;
-  --series-primary: #60324e;
-  --series-soft: #eef1f6;
-  --series-gold: #f4d996;
-  --series-light: #f6f5fa;
-  --series-rule: #d6dce4;
+  /* The Scream pairs red-orange sky with bands of blue water and ochre reflected light. */
+  --cover-bg: #edbd96;
+  --cover-ink: #2d4152;
+  --cover-muted: #51453f;
+  --cover-accent: #773d2b;
+  --cover-rule: #9d775e;
+  --cover-mat: #e3a574;
+  --cover-button: #37566a;
+  --cover-button-ink: #fffaf3;
+  --cover-hover: #f5d0aa;
+  --series-ink: #293e4a;
+  --series-muted: #575953;
+  --series-primary: #37566a;
+  --series-soft: #f6efe4;
+  --series-rule: #d8ccbd;
   --ink: var(--series-ink);
   --muted: var(--series-muted);
-  --paper: #f9fafc;
+  --paper: #faf8f3;
   --surface: #fff;
-  --wash: #eeeaf3;
+  --wash: #f7e9db;
   --line: var(--series-rule);
-  --line-dark: #a8b2c3;
-  --accent: #832e5b;
+  --line-dark: #9a8876;
+  --accent: #8b442e;
   --primary: var(--series-primary);
-  --secondary: #2b6363;
-  --reference: #965d2e;
-  --night: var(--series-night);
-  --on-dark-muted: #c9ccd9;
+  --secondary: #365d72;
+  --reference: #9b573d;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --display: "Playfair Display", Georgia, serif;
   --mono: "JetBrains Mono", Consolas, monospace;
@@ -76,7 +81,7 @@ strong { font-weight: 600; }
 .text-link { font-size: 11px; text-decoration: underline; text-underline-offset: 4px; }
 .compact-controls { display: flex; gap: 14px; }
 .compact-controls label { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; flex: 1; font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--muted); min-width: 0; }
-select { appearance: none; min-width: 0; width: 100%; min-height: 50px; padding: 12px 40px 12px 16px; border: 1px solid var(--line-dark); border-radius: 4px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2360324e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--ink); }
+select { appearance: none; min-width: 0; width: 100%; min-height: 50px; padding: 12px 40px 12px 16px; border: 1px solid var(--line-dark); border-radius: 4px; background: var(--paper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='%2337566a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0; color: var(--ink); }
 select:hover { border-color: var(--secondary); }
 select:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; }
 select option { color: var(--ink); background: var(--surface); }
@@ -96,7 +101,7 @@ summary { cursor: pointer; padding-block: 15px; font-size: 12px; }
 .small-note { font-size: 11px; color: var(--muted); line-height: 1.8; margin-top: 20px; }
 .fallback { margin-top: 20px; font-size: 12px; }
 .fallback a { text-decoration: underline; }
-.site-footer { --footer-muted: var(--on-dark-muted); padding: 52px 0 25px; color: var(--series-light); background: var(--night); }
+.site-footer { --footer-muted: #e2edf0; padding: 52px 0 25px; color: #fffaf3; background: #3b5866; }
 .footer-grid { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.45fr) minmax(0,.5fr); gap: clamp(28px,5.55vw,80px); }
 
 .footer-project p { max-width: 260px; margin-top: 18px; color: var(--footer-muted); font-size: .75rem; }
@@ -106,10 +111,10 @@ summary { cursor: pointer; padding-block: 15px; font-size: 12px; }
 .footer-links { display: flex; flex-direction: column; }
 .footer-links a { width: fit-content; margin-bottom: 7px; color: var(--footer-muted); font-size: .86rem; }
 .site-footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.site-footer a:focus-visible { outline-color: var(--series-gold); }
+.site-footer a:focus-visible { outline-color: #f8d7aa; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 58px; padding-top: 20px; border-top: 1px solid rgb(255 255 255 / 14%); color: var(--footer-muted); font-size: .8rem; }
 .figure-dialog { width: min(95vw, 1500px); max-width: none; max-height: 92vh; border: 0; border-radius: 3px; padding: 60px 22px 22px; background: var(--surface); }
-.figure-dialog::backdrop { background: rgb(42 31 45 / 86%); }
+.figure-dialog::backdrop { background: rgb(45 65 76 / 85%); }
 .figure-dialog img { width: 100%; max-height: 72vh; object-fit: contain; }
 .figure-dialog p { font-size: 12px; line-height: 1.8; color: var(--muted); margin-top: 16px; text-align: center; }
 .dialog-close { position: absolute; right: 20px; top: 14px; min-height: 36px; background: var(--paper); border: 1px solid var(--line); padding: 5px 14px; font-size: 12px; }
