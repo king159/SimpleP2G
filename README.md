@@ -15,7 +15,7 @@
 </p>
 
 <div align="center">
-  <span>Paper (coming soon)</span> ·
+  <a href="https://www.biorxiv.org/content/10.64898/2026.11.23.768493v1"> Paper</a> ·
   <a href="https://personal-page.wjh.app/SimpleP2G/">Project Page</a>
 </div>
 
