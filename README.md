@@ -15,8 +15,9 @@
 </p>
 
 <div align="center">
-  <a href="https://www.biorxiv.org/content/10.64898/2026.11.23.768493v1"> Paper</a> ·
-  <a href="https://personal-page.wjh.app/SimpleP2G/">Project Page</a>
+  <a href="https://www.biorxiv.org/content/10.64898/2026.11.23.768493v1">Paper</a> ·
+  <a href="https://personal-page.wjh.app/SimpleP2G/">Project Page</a> ·
+  <a href="https://huggingface.co/king159/SimpleP2G">Pretrained Models</a>
 </div>
 
 <p align="center"><em>KDD 2027 · AI for Sciences Track</em></p>
@@ -29,7 +30,7 @@
 
 ## 📄 Abstract
 
-Pathology-image-to-gene-expression (P2G) studies often change the prediction head, image encoder, and spatial context together, making performance differences difficult to attribute. We examine these factors through paired image-input controls and explicit input regimes. Our main comparison covers five HEST-1K datasets, two 200-gene panels, and three selected held-out slides per dataset, using validation-selected checkpoints. Across all five datasets, replacing conventional image inputs with Virchow2 improves mean PCC-200 in 39 of 40 method--dataset--panel comparisons, while one comparison decreases. We introduce **SimpleP2G**, a direct gene-query decoder over frozen embeddings, and **SimpleP2G-cross**, which adds spatially positioned neighboring embeddings. With shared Virchow2 features, SimpleP2G has the highest single-patch mean PCC-200 on all five datasets under both panels; the cross-patch variant leads on four of five datasets under each panel. Decoder and context ablations show that greater depth and broader context do not consistently improve prediction. Together, these results suggest improving image representations before adding prediction-head complexity: a direct decoder over frozen pathology embeddings already provides a strong baseline. We hope our reimplemented image-encoder-upgraded baselines and SimpleP2G models serve as transparent, reproducible, and strong controls for future P2G research. 
+Pathology-image-to-gene-expression (P2G) studies often change the prediction head, image encoder, and spatial context together, making performance differences difficult to attribute. We examine these factors through paired image-input controls and explicit input regimes. Our main comparison covers five HEST-1k datasets, two 200-gene panels, and three selected held-out slides per dataset, using validation-selected checkpoints. Across all five datasets, replacing conventional image inputs with Virchow2 improves mean PCC-200 in 39 of 40 method–dataset–panel comparisons, while one comparison decreases. We introduce **SimpleP2G**, a direct gene-query decoder over frozen embeddings, and **SimpleP2G-cross**, which adds spatially positioned neighboring embeddings. With shared Virchow2 features, SimpleP2G has the highest single-patch mean PCC-200 on all five datasets under both panels; the cross-patch variant leads on four of five datasets under each panel. Decoder and context ablations show that greater depth and broader context do not consistently improve prediction. Together, these results suggest improving image representations before adding prediction-head complexity: a direct decoder over frozen pathology embeddings already provides a strong baseline. We hope our reimplemented image-encoder-upgraded baselines and SimpleP2G models serve as transparent, reproducible, and strong controls for future P2G research.
 
 <a id="installation"></a>
 
@@ -126,3 +127,22 @@ With Virchow2 fixed, **SimpleP2G leads all 10 single-patch dataset–panel compa
 **PCC-200, mean ± sample SD across three test slides.** Bold marks the highest mean among all methods in the same input setting.
 
 Switching to Virchow2 improves **39 of 40** dataset–method–panel means, with PCC changes from **−0.0118 to +0.3113**. BLEEP on Brain HMHVG is the exception. In the separate fold-0 SimpleP2G ablation, Virchow2 leads 7 of 10 comparisons, UNI leads 2, and DINOv2-L leads 1.
+
+## Citation
+
+If you find SimpleP2G or our benchmark controls useful in your research, please cite:
+
+```bibtex
+@inproceedings{wang2027simplep2g,
+  title     = {SimpleP2G: Importance of Image Encoders for Gene Expression Prediction from Pathology Images},
+  author    = {Wang, Jinghao and Zhang, Jingjie and Hsieh, Chang-Yu and Gu, Chunbin and Heng, Pheng-Ann},
+  booktitle = {Proceedings of the 33rd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1 (KDD '27)},
+  year      = {2027},
+  location  = {San Jose, CA, USA},
+  doi       = {10.1145/3862868.3871598}
+}
+```
+
+## License
+
+Original SimpleP2G code is released under the [MIT License](LICENSE). Adapted benchmark implementations, datasets, and pretrained encoders retain their respective licenses and terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

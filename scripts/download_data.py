@@ -10,7 +10,6 @@ import hashlib
 import json
 import os
 import shutil
-import subprocess
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone

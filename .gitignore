@@ -48,3 +48,5 @@ wandb/
 /skills-lock.json
 /.agents/
 /.tmux*
+
+node_modules/
