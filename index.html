@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="SimpleP2G studies the importance of image encoders for gene expression prediction from pathology images, with controlled comparisons on five HEST-1K datasets.">
+  <meta name="description" content="SimpleP2G studies the importance of image encoders for gene expression prediction from pathology images, with controlled comparisons on five HEST-1k datasets.">
   <meta name="theme-color" content="#edbd96">
   <meta property="og:title" content="SimpleP2G · The representation matters.">
   <meta property="og:description" content="Image representations drive pathology-to-gene prediction. SimpleP2G makes this observation concrete with a direct gene-query decoder.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://personal-page.wjh.app/SimpleP2G/">
+  <meta property="og:image" content="https://personal-page.wjh.app/SimpleP2G/img/munch-the-scream.jpg">
   <title>SimpleP2G · Gene Expression Prediction from Pathology Images</title>
+  <link rel="canonical" href="https://personal-page.wjh.app/SimpleP2G/">
   <link rel="icon" type="image/svg+xml" href="img/favicon.svg?v=206116f0c630">
   <link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/site.css?v=cee88ed1b34c">
@@ -38,7 +41,8 @@
           <p class="hero-deck">Before adding a more complex prediction head, start with a better image representation. A direct decoder over frozen pathology embeddings is already a strong baseline.</p>
           <nav class="hero-actions" aria-label="Project resources">
             <a class="button button-primary" href="https://github.com/king159/SimpleP2G" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-2.91 17.93c.46.08.63-.2.63-.44v-1.57c-2.57.56-3.11-1.09-3.11-1.09-.42-1.07-1.03-1.36-1.03-1.36-.84-.57.06-.56.06-.56.93.07 1.42.96 1.42.96.83 1.42 2.18 1.01 2.71.77.08-.6.33-1.01.59-1.24-2.05-.23-4.2-1.02-4.2-4.54 0-1 .36-1.81.96-2.45-.1-.23-.42-1.16.09-2.42 0 0 .78-.25 2.53.94A8.77 8.77 0 0 1 12 9.47c.79 0 1.59.11 2.33.34 1.75-1.19 2.53-.94 2.53-.94.51 1.26.19 2.19.09 2.42.6.64.96 1.45.96 2.45 0 3.53-2.15 4.3-4.2 4.53.33.29.63.85.63 1.72v1.3c0 .24.17.52.64.44A9.2 9.2 0 0 0 12 2.8Z"/></svg>Code on GitHub</a>
-            <span class="paper-status">Paper coming soon</span>
+            <a class="button" href="https://www.biorxiv.org/content/10.64898/2026.11.23.768493v1" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7Z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>Paper (bioRxiv)</a>
+            <a class="button" href="https://huggingface.co/king159/SimpleP2G" target="_blank" rel="noreferrer"><img src="img/huggingface.svg" width="20" height="20" alt="">Pretrained models</a>
           </nav>
         </div>
         <figure class="hero-art">
@@ -49,14 +53,14 @@
         </figure>
         <div class="hero-meta">
           <p class="paper-authors">
-            <a href="https://personal-page.wjh.app/">Jinghao Wang<sup>1</sup></a>
-            <a href="https://zhangjj26.github.io/">Jingjie Zhang<sup>1</sup></a>
-            <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ">Chang-Yu Hsieh<sup>2</sup></a>
-            <a href="https://scholar.google.com/citations?user=BlSFT8UAAAAJ">Chunbin Gu<sup>1,*</sup></a>
-            <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php">Pheng Ann Heng<sup>1</sup></a>
+            <a href="https://personal-page.wjh.app/" target="_blank" rel="noreferrer">Jinghao Wang<sup>1</sup></a>
+            <a href="https://zhangjj26.github.io/" target="_blank" rel="noreferrer">Jingjie Zhang<sup>1</sup></a>
+            <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ" target="_blank" rel="noreferrer">Chang-Yu Hsieh<sup>2</sup></a>
+            <a href="https://scholar.google.com/citations?user=BlSFT8UAAAAJ" target="_blank" rel="noreferrer">Chunbin Gu<sup>1,†</sup></a>
+            <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php" target="_blank" rel="noreferrer">Pheng-Ann Heng<sup>1</sup></a>
           </p>
           <p class="paper-affiliations"><span><sup>1</sup> The Chinese University of Hong Kong</span><span><sup>2</sup> Zhejiang University</span></p>
-          <p class="paper-contact"><a href="mailto:jinghao.w@link.cuhk.edu.hk">jinghao.w@link.cuhk.edu.hk</a></p>
+          <p class="paper-contact"><span><sup>†</sup> Correspondence: <a href="mailto:gchb4science@gmail.com">gchb4science@gmail.com</a></span></p>
         </div>
       </div>
     </section>
@@ -142,7 +146,7 @@
 
     <section class="section section-paper" id="results">
       <div class="page-shell">
-        <div class="split-heading"><div><h2>Results with a shared encoder</h2></div><div class="section-intro"><p>Compare all prediction heads with shared Virchow2 features across five HEST-1K datasets.</p><p>All 300 fits are complete. Each dataset reports the mean and sample SD over three held-out slides, using seed 42 and validation-selected checkpoints. SimpleP2G leads all ten single-patch dataset–panel comparisons. SimpleP2G-cross leads eight of ten cross-patch comparisons. Switch the panel or metric to explore the exceptions.</p></div></div>
+        <div class="split-heading"><div><h2>Results with a shared encoder</h2></div><div class="section-intro"><p>Compare all prediction heads with shared Virchow2 features across five HEST-1k datasets.</p><p>All 300 fits are complete. Each dataset reports the mean and sample SD over three held-out slides, using seed 42 and validation-selected checkpoints. SimpleP2G leads all ten single-patch dataset–panel comparisons. SimpleP2G-cross leads eight of ten cross-patch comparisons. Switch the panel or metric to explore the exceptions.</p></div></div>
         <div class="results-toolbar">
           <div class="panel-picker" role="group" aria-label="Results gene panel"><button type="button" data-results-panel="HMHVG" aria-pressed="true">HMHVG-200</button><button type="button" data-results-panel="HVG" aria-pressed="false">HVG-200</button></div>
           <div class="compact-controls"><label>Metric<select id="results-metric"><option value="pcc200">PCC-200 ↑</option><option value="pcc50">PCC-50 ↑</option><option value="mse">MSE ↓</option><option value="mae">MAE ↓</option></select></label></div>
@@ -175,11 +179,11 @@
       </div>
       <div class="footer-authors">
         <span class="footer-label">Authors</span>
-        <p><a href="https://personal-page.wjh.app/">Jinghao Wang</a>,
-          <a href="https://zhangjj26.github.io/">Jingjie Zhang</a>,
-          <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ">Chang-Yu Hsieh</a>,
+        <p><a href="https://personal-page.wjh.app/" target="_blank" rel="noreferrer">Jinghao Wang</a>,
+          <a href="https://zhangjj26.github.io/" target="_blank" rel="noreferrer">Jingjie Zhang</a>,
+          <a href="https://scholar.google.com/citations?user=K-AjhSgAAAAJ" target="_blank" rel="noreferrer">Chang-Yu Hsieh</a>,
           <a href="https://scholar.google.com/citations?user=BlSFT8UAAAAJ" target="_blank" rel="noreferrer">Chunbin Gu</a>,
-          <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php">Pheng Ann Heng</a></p>
+          <a href="https://appsrv.cse.cuhk.edu.hk/~pheng/index.php" target="_blank" rel="noreferrer">Pheng-Ann Heng</a></p>
         <small>The Chinese University of Hong Kong · Zhejiang University</small>
       </div>
       <nav class="footer-links" aria-label="Project links">
@@ -188,10 +192,12 @@
         <a href="#overview">Encoder comparisons</a>
         <a href="#model">Model</a>
         <a href="#results">Full results</a>
+        <a href="https://www.biorxiv.org/content/10.64898/2026.11.23.768493v1" target="_blank" rel="noreferrer">Paper</a>
+        <a href="https://huggingface.co/king159/SimpleP2G" target="_blank" rel="noreferrer">Models</a>
         <a href="https://github.com/king159/SimpleP2G" target="_blank" rel="noreferrer">Code</a>
       </nav>
     </div>
-    <div class="page-shell footer-bottom"><span>© 2026 SimpleP2G authors</span><a href="mailto:jinghao.w@link.cuhk.edu.hk">Contact</a></div>
+    <div class="page-shell footer-bottom"><span>© 2026 SimpleP2G authors</span><a href="mailto:gchb4science@gmail.com">Contact</a></div>
   </footer>
   <dialog class="figure-dialog" id="figure-dialog" aria-labelledby="figure-caption"><button type="button" class="dialog-close" aria-label="Close enlarged figure">Close ×</button><img id="figure-image" alt=""><p id="figure-caption"></p></dialog>
 </body>

@@ -7,3 +7,5 @@ __pycache__/
 # Local paper proofs and static builds
 /*.pdf
 /site/
+
+node_modules/
